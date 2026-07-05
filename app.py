@@ -241,3 +241,27 @@ app.logger.setLevel(logging.DEBUG)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
+    def create_table():
+    conn = sqlite3.connect(DATABASE)
+
+    conn.execute("""
+    CREATE TABLE IF NOT EXISTS customers (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        number TEXT,
+        address TEXT,
+        brand TEXT,
+        camera TEXT,
+        install_date TEXT,
+        next_service TEXT,
+        status TEXT
+    )
+    """)
+
+    conn.commit()
+    conn.close()
+    app = Flask(__name__)
+
+DATABASE = "customers.db"
+
+create_table()
